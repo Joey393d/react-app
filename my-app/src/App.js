@@ -9,16 +9,16 @@ import Footer from './Footer';
 
 function App() {
   return (
-    <>
+   <div>
     <Header />
-
-     <Main />
     
+    <Main />
 
-    <footer>
-     <Footer />
-    </footer>
-     </>
+    <Main />
+    
+    <Footer />
+   </div>
+     
   );
 
 }
