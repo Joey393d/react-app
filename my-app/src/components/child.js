@@ -1,6 +1,7 @@
 import { render } from '@testing-library/react';
 import React from 'react';
 import Button from 'react-bootstrap/Button';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 
 class Child extends React.Component {
@@ -27,7 +28,7 @@ class Child extends React.Component {
   render(){
     return (
       <>
-      <p><button onClick={this.addVote}>+1</button></p>
+      <p><Button variant="outline-dark"  onClick={this.addVote}>+1</Button></p>
       <p>{this.state.votes}</p>
       </>
     );
