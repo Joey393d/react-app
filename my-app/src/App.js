@@ -1,41 +1,53 @@
-
-
-import Header from './Header';
-import Main from './Main';
-import Footer from './Footer';
-import Data from './data/data.json'
 import React from 'react';
-import SelectedBeast from './src/selectedBeast.js'
+import './App.css';
+import Footer from './components/Footer';
+import Header from './components/Header';
+import Main from './components/Main';
+import SelectedBeast from './components/selectedBeast';
+import beastData from './data/data.json';
 
-
-class App extends React.Component{
+// Converted from function component to a class component
+// by calling the function 'render' and putting it in a class that extends Component
+class App extends React.Component {
   constructor(props) {
     super(props)
 
     this.state = {
-      showModal: true,
+      showModal: false,
+      selectedBeast: null,
     };
   }
 
+  handleSelectBeast = beastIndex => {
+    this.setState({
+      selectedBeast: beastData[beastIndex],
+      showModal: true,
+    });
+  }
 
-render() {
-  let theme='dark';
-  
-  return (
-    <div classname="App">
-      <Header theme={theme} />
-    
-      <Main beasts={Data} />
+  handleClose = () => {
+    console.log('Hiding modal');
+    this.setState({ showModal: false });
+  }
 
-    
-      <Footer theme={theme} />
-  
-      <SelectedBeast
-      show={this.state.showModal} />
-    </div>
-     
+  render() {
+    let theme = 'dark';
+
+    return (
+      <div className="App">
+        <Header theme={theme} />
+        <Main beasts={beastData}
+          handleSelectBeast={this.handleSelectBeast}
+        />
+        <Footer theme={theme} />
+        <SelectedBeast
+          beast={this.state.selectedBeast}
+          show={this.state.showModal}
+          handleClose={this.handleClose}
+        />
+      </div>
     );
-
   }
 }
+
 export default App;
