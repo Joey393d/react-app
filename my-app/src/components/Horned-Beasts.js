@@ -1,18 +1,40 @@
 import React from 'react';
-import Child from './child'
+import Card from 'react-bootstrap/Card';
 
 class HornedBeast extends React.Component {
+  constructor(props) {
+    super(props);
 
-  render(){
+    this.state = {
+      favorites: 0,
+    };
+  }
+
+  // have to use an arrow function here
+  handleCardClick = () => {
+    let currentFavorites = this.state.favorites;
+    this.setState({ favorites: currentFavorites + 1 });
+  }
+
+  showModal = () => {
+    this.props.displayModalForIndex(this.props.beastIndex);
+  }
+
+  render() {
     return (
-      <div>
-        <h2>{this.props.title}</h2>
-        <img title={this.props.title} src={this.props.image} alt={this.props.alt}/>
-        <p>{this.props.description}</p>
-        <Child />
-      </div>
+      <Card
+        onClick={this.handleCardClick}
+      >
+        <Card.Body>
+          <Card.Img variant="top" src={this.props.imageUrl}
+            onClick={this.showModal}
+          />
+          <Card.Title>{this.props.title}</Card.Title>
+          <Card.Text>❤️ = {this.state.favorites}</Card.Text>
+          <Card.Text>{this.props.description}</Card.Text>
+        </Card.Body>
+      </Card>
     )
-
   }
 }
 
